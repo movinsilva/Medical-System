@@ -23,5 +23,10 @@
     "hashedPassword" : "0c5fca893e4c92ae4f9c6d08dec20d9f",
     "userType" : "Patient",
     "privilegeLevel" : 0
+  },
+  "movinsilva" : {
+    "hashedPassword" : "57bed80733f2ae9698a31ac0b270ee64",
+    "userType" : "Patient",
+    "privilegeLevel" : 0
   }
 }
