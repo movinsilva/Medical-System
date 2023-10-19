@@ -1,0 +1,17 @@
+{
+  "movin" : {
+    "hashedPassword" : "1256427248aaa745f6a69d73a6c67abe",
+    "userType" : "Patient",
+    "privilegeLevel" : 1
+  },
+  "testDoctor" : {
+    "hashedPassword" : "001cee567d7ecbbd2c08e1adf182847e",
+    "userType" : "Doctor",
+    "privilegeLevel" : 2
+  },
+  "testreception" : {
+    "hashedPassword" : "afe9a3722e8ea7f37ae81ae2b09ea0ed",
+    "userType" : "Receptionist",
+    "privilegeLevel" : 3
+  }
+}
