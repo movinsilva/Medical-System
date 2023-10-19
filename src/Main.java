@@ -1,3 +1,4 @@
+import authentication.Login;
 import authentication.Register;
 
 import java.util.Scanner;
@@ -16,7 +17,7 @@ public class Main {
 
         switch (choice) {
             case 1:
-                System.out.println("Logged in...");
+                Login.loginUser();
                 break;
             case 2:
                 Register.selectAccount();

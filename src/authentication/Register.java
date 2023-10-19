@@ -13,11 +13,18 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 
+import model.PatientData;
 import model.UserConfig;
+
+import static authentication.Hashing.hashPasswordMD5;
+import static storage.Config.loadConfigData;
+import static storage.Config.saveConfigData;
+import static storage.Data.loadPatientDataFromJson;
+import static storage.Data.savePatientDataToJson;
 
 public class Register {
 
-    private static final String CONFIG_FILE = "config.json";
+
 
 
     public static void selectAccount() {
@@ -32,13 +39,13 @@ public class Register {
 
         switch (choice) {
             case 1:
-                registerUser("Patient", 1);
+                registerUser("Patient", 0);
                 break;
             case 2:
-                registerUser("Doctor", 2);
+                registerUser("Doctor", 1);
                 break;
             case 3:
-                registerUser("Receptionist", 3);
+                registerUser("Receptionist", 2);
                 break;
             default:
                 System.out.println("Invalid option. Please try again.");
@@ -63,11 +70,8 @@ public class Register {
         try {
             // Hash the password
             String hashedPassword = hashPasswordMD5(password);
-
             // Add the new user to the configuration data
             configData.put(username, new UserConfig(hashedPassword, userType, privilege));
-
-
             // Save the updated configuration data
             saveConfigData(configData);
 
@@ -77,6 +81,12 @@ public class Register {
         }
 
         System.out.println(userType + " registration successful.");
+
+        if (privilege == 1) {
+            Map<String, PatientData> currData = loadPatientDataFromJson();
+            currData.put(username, new PatientData());
+            savePatientDataToJson(currData);
+        }
     }
 
     private static boolean isValidPassword(String password) {
@@ -88,46 +98,11 @@ public class Register {
         return isValid;
     }
 
-    private static Map<String, UserConfig> loadConfigData() {
-        try {
-            ObjectMapper objectMapper = new ObjectMapper();
-            File configFile = new File(CONFIG_FILE);
 
-            if (configFile.exists()) {
-                return objectMapper.readValue(configFile, new TypeReference<Map<String, UserConfig>>() {});
-            } else {
-                return new HashMap<>();
-            }
-        } catch (IOException e) {
-            System.out.println("Error loading configuration data: " + e.getMessage());
-            return new HashMap<>();
-        }
-    }
 
-    private static void saveConfigData(Map<String, UserConfig> configData) {
-        try {
-            ObjectMapper objectMapper = new ObjectMapper();
-            objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
-            objectMapper.writeValue(new File(CONFIG_FILE), configData);
-        } catch (IOException e) {
-            System.out.println("Error saving configuration data: " + e.getMessage());
-        }
-    }
 
-    public static String hashPasswordMD5(String password) throws NoSuchAlgorithmException {
-        MessageDigest md = MessageDigest.getInstance("MD5");
-        md.update(password.getBytes());
 
-        byte[] byteData = md.digest();
 
-        // Convert the byte data to a hexadecimal string
-        StringBuilder sb = new StringBuilder();
-        for (byte b : byteData) {
-            sb.append(String.format("%02x", b));
-        }
-
-        return sb.toString();
-    }
 
 
 
