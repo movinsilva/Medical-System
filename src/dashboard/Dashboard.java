@@ -52,14 +52,14 @@ public class Dashboard {
             PatientData patientData = dataMap.get(username);
 
             // Print personal details
-            System.out.println("Personal Details for User: " + username);
+            System.out.println("\nPersonal Details for User: " + username);
             Map<String, String> personalDetails = patientData.getPersonalDetails();
             for (Map.Entry<String, String> entry : personalDetails.entrySet()) {
                 System.out.println(entry.getKey() + ": " + entry.getValue());
             }
 
             // Print records
-            System.out.println("Records for User: " + username);
+            System.out.println("\nRecords for User: " + username);
             java.util.List<Map<String, String>> records = patientData.getRecords();
             for (Map<String, String> record : records) {
                 System.out.println("Record:");

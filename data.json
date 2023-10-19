@@ -1,1 +1,21 @@
-{"test0":{"personal details":{},"records":[]}}
+{"test0":{"personal details":{
+  "Full Name": "Test Name",
+  "Phone No": "0721111111",
+  "Address": "No 101A, Temple Road, Colombo"
+},"records":[
+  {
+    "sicknessDetails": "some detail",
+    "drugPrescription": "some prescription",
+    "labTestPrescription": "some prescription"
+  },
+  {
+    "sicknessDetails": "some detail",
+    "drugPrescription": "some prescription",
+    "labTestPrescription": "some prescription"
+  },
+  {
+    "sicknessDetails": "some detail",
+    "drugPrescription": "some prescription",
+    "labTestPrescription": "some prescription"
+  }
+]}}
